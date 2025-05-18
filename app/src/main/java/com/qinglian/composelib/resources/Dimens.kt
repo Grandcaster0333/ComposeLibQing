@@ -12,4 +12,8 @@ object Dimens {
     object ComponentSize {
         val dividerThickness = 0.5.dp
     }
+
+    object Weight {
+        const val SMALL = 1f
+    }
 }

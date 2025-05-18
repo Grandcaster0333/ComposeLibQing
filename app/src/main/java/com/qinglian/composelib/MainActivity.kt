@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.qinglian.composelib.preference.PreferenceSwitch
+import com.qinglian.composelib.preference.components.PreferenceSwitch
 import com.qinglian.composelib.ui.theme.ComposeLibQingTheme
 
 /**
@@ -25,11 +25,11 @@ class MainActivity : ComponentActivity() {
             ComposeLibQingTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     PreferenceSwitch(
+                        modifier = Modifier.padding(innerPadding),
                         title = "Health check",
                         content = "Force Sanders to eat today",
                         isChecked = mIsChecked,
-                        onChange = { mIsChecked = it },
-                        modifier = Modifier.padding(innerPadding)
+                        onChange = { mIsChecked = it }
                     )
                 }
             }

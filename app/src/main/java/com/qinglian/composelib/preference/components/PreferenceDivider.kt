@@ -1,4 +1,4 @@
-package com.qinglian.composelib.preference
+package com.qinglian.composelib.preference.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
