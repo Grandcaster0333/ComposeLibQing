@@ -2,6 +2,7 @@ package com.qinglian.composelib.preference.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,7 +16,7 @@ import com.qinglian.composelib.resources.Dimens
 fun PreferenceDivider(modifier: Modifier) {
     HorizontalDivider(
         modifier = modifier.padding(vertical = Dimens.Padding.medium),
-        color = Color.Gray,
+        color = MaterialTheme.colorScheme.outline,
         thickness = Dimens.ComponentSize.dividerThickness
     )
 }

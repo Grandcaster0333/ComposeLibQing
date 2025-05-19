@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,38 +24,53 @@ import com.qinglian.composelib.ui.theme.ComposeLibQingTheme
  * ... don't stair at me, my sanity still exists... hopefully.
  *
  * @param modifier: ...hopefully this is self-explanatory
- * @param title: title (main text) of the section. Mandatory. Or why are you using this?
- * @param content: optional description text of the section. Disabled by default
+ * @param title: title of the section. Disabled by default.
+ * @param content: description text of the section.
  * @param onClick: if you want the text to react... Shhhh, be careful, don't wake it up.
  * @param icon: Optional icon on the left, Disabled by default. Yes I'm not supporting RTL yet.
- *        only attached to title.
+ * @param shouldIconAttachToTitle: if you want the icon to show near title instead of content.
+ *        Default to false.
  */
 @Composable
-fun PreferenceText(modifier: Modifier = Modifier, title: String, content: String? = null,
-                   onClick: (() -> Unit)? = null, icon: (@Composable (() -> Unit))? = null
+fun PreferenceText(modifier: Modifier = Modifier, title: String? = null, content: String? = null,
+                   onClick: (() -> Unit)? = null, icon: (@Composable (() -> Unit))? = null,
+                   shouldIconAttachToTitle: Boolean = false
 ) {
-    Column {
+    Column (modifier = modifier.clickable { onClick?.let { it() } }) {
+        title?.let {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (shouldIconAttachToTitle || content == null) {
+                    icon?.let { it(); Spacer(modifier = Modifier.width(Dimens.Padding.medium)) }
+                }
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = modifier
+                        .padding(
+                            vertical = Dimens.Padding.medium,
+                            horizontal = Dimens.Padding.small
+                        )
+                        .weight(Dimens.Weight.SMALL)
+                )
+            }
+        }
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            icon?.let { it(); Spacer(modifier = Modifier.width(Dimens.Padding.medium)) }
-            Text(
-                text = title,
-                modifier = modifier
-                    .padding(
-                        vertical = Dimens.Padding.medium,
-                        horizontal = Dimens.Padding.small
-                    )
-                    .weight(Dimens.Weight.SMALL) //in case switch takes space
-                    .clickable { onClick?.let { it() } }
-            )
-        }
-
-        if (content != null) {
-            Text(
-                text = content,
-                modifier = modifier.padding(Dimens.Padding.small)
-            )
+            if (content != null) {
+                if (!shouldIconAttachToTitle) {
+                    icon?.let { it(); Spacer(modifier = Modifier.width(Dimens.Padding.medium)) }
+                }
+                Text(
+                    text = content,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = modifier.padding(Dimens.Padding.small)
+                        .weight(Dimens.Weight.SMALL) //in case icon takes space
+                )
+            }
         }
     }
 }
@@ -83,7 +99,7 @@ fun PreviewPreferenceTextFull() {
                     contentDescription = null
                 )
             },
-            content = "I like the weather today"
+            content = "And I like the weather today",
         )
     }
 }

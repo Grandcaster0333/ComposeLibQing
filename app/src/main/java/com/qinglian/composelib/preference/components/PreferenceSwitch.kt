@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +38,7 @@ fun PreferenceSwitch(modifier: Modifier = Modifier, title: String? = null, conte
         title?.let {
             Text(
                 text = title,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = modifier.padding(Dimens.Padding.small)
             )
         }
@@ -52,6 +54,7 @@ fun PreferenceSwitch(modifier: Modifier = Modifier, title: String? = null, conte
                 icon?.let { it(); Spacer(modifier = Modifier.width(Dimens.Padding.medium)) }
                 Text(
                     text = content,
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = modifier.padding(Dimens.Padding.small)
                 )
             }
