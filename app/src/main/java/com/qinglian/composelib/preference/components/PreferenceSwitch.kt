@@ -65,6 +65,7 @@ fun PreferenceSwitch(modifier: Modifier = Modifier, title: String? = null, conte
             )
         }
     }
+
 }
 
 @Preview(showBackground = true)
